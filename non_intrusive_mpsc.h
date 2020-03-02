@@ -1,6 +1,3 @@
-// C++ implementation of a non-intrusive MPSC queue.
-// http://www.1024cores.net/home/lock-free-algorithms/queues/non-intrusive-mpsc-node-based-queue
-
 #ifndef LOCKFREE_NON_INTRUSIVE_MPSC
 #define LOCKFREE_NON_INTRUSIVE_MPSC
 
