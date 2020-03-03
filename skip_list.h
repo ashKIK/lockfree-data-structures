@@ -1,9 +1,6 @@
-#ifndef LOCKFREE_SKIP_LIST
-#define LOCKFREE_SKIP_LIST
-
 #include <atomic>
-#include <vector>
 #include <stdlib.h>
+#include <vector>
 
 #include "list.h"
 
@@ -11,7 +8,8 @@ namespace skip_list {
 
 class List : public interface::List {
 public:
-  explicit List(int max_height) : head_(new Node(0, max_height)), max_height_(max_height) {}
+  explicit List(int max_height)
+      : head_(new Node(0, max_height)), max_height_(max_height) {}
 
   ~List() override {
     auto node = head_;
@@ -125,6 +123,4 @@ private:
   std::atomic<int> height_{1};
 };
 
-}
-
-#endif
+} // namespace skip_list

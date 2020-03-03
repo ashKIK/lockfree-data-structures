@@ -1,6 +1,3 @@
-#ifndef LOCKFREE_LIST
-#define LOCKFREE_LIST
-
 namespace interface {
 
 class List {
@@ -22,6 +19,4 @@ public:
   virtual Iterator *NewIterator() = 0;
 };
 
-}
-
-#endif
+} // namespace interface

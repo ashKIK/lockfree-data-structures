@@ -1,6 +1,3 @@
-#ifndef LOCKFREE_NON_INTRUSIVE_MPSC
-#define LOCKFREE_NON_INTRUSIVE_MPSC
-
 #include <atomic>
 
 #include "queue.h"
@@ -51,6 +48,4 @@ private:
   std::atomic<Node *> tail_;
 };
 
-}
-
-#endif
+} // namespace non_intrusive_mpsc

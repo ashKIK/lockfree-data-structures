@@ -1,6 +1,3 @@
-#ifndef LOCKFREE_BOUNDED_MPMC
-#define LOCKFREE_BOUNDED_MPMC
-
 #include <atomic>
 #include <cassert>
 
@@ -28,7 +25,8 @@ public:
       auto seq = node->sequence.load(std::memory_order_acquire);
       auto diff = seq - pos;
       if (diff == 0) {
-        if (enqueue_pos_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) {
+        if (enqueue_pos_.compare_exchange_weak(pos, pos + 1,
+                                               std::memory_order_relaxed)) {
           node->data = data;
           node->sequence.store(pos + 1, std::memory_order_release);
           return true;
@@ -46,9 +44,11 @@ public:
       auto seq = node->sequence.load(std::memory_order_acquire);
       auto diff = seq - (pos + 1);
       if (diff == 0) {
-        if (dequeue_pos_.compare_exchange_weak(pos, pos + 1, std::memory_order_relaxed)) {
+        if (dequeue_pos_.compare_exchange_weak(pos, pos + 1,
+                                               std::memory_order_relaxed)) {
           data = node->data;
-          node->sequence.store(pos + buffer_mark_ + 1, std::memory_order_release);
+          node->sequence.store(pos + buffer_mark_ + 1,
+                               std::memory_order_release);
           return true;
         }
       } else if (diff < 0) {
@@ -69,6 +69,4 @@ private:
   std::atomic<int64_t> dequeue_pos_{0};
 };
 
-}
-
-#endif
+} // namespace bounded_mpmc

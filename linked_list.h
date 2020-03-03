@@ -1,6 +1,3 @@
-#ifndef LOCKFREE_LINKED_LIST
-#define LOCKFREE_LINKED_LIST
-
 #include <atomic>
 
 #include "list.h"
@@ -30,7 +27,8 @@ public:
         return false;
       }
       node->next.store(next, std::memory_order_relaxed);
-      if (prev->next.compare_exchange_weak(next, node, std::memory_order_acq_rel)) {
+      if (prev->next.compare_exchange_weak(next, node,
+                                           std::memory_order_acq_rel)) {
         return true;
       }
     }
@@ -90,6 +88,4 @@ private:
   Node *head_{nullptr};
 };
 
-}
-
-#endif
+} // namespace linked_list

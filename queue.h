@@ -1,6 +1,3 @@
-#ifndef LOCKFREE_QUEUE
-#define LOCKFREE_QUEUE
-
 namespace interface {
 
 class Queue {
@@ -12,6 +9,4 @@ public:
   virtual bool Dequeue(int &data) = 0;
 };
 
-}
-
-#endif
+} // namespace interface
